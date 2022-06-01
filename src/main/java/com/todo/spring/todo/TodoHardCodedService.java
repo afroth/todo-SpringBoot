@@ -1,7 +1,7 @@
 package com.todo.spring.todo;
 
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.scanner.Constant;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,7 @@ public class TodoHardCodedService {
 
     // ArrayList of object To do, to hold the created objects
     private static List<Todo> todos = new ArrayList<>();
+
     private static int idCounter = 0;// counter for to do list id;
 
     static{
@@ -30,6 +31,8 @@ public class TodoHardCodedService {
     public List<Todo> findAll(){
         return todos;
     }
+
+
     //***********************************************************************************
     // method gets object from the array list with the matching id passed in
     public Todo deleteById(long id){
@@ -56,5 +59,23 @@ public class TodoHardCodedService {
         }// end for
         // no matching id object found
         return null;
+    }
+
+    //***********************************************************************************
+    // for updating a to do object, we delete the existing object with the matching id passed in
+    // we then add the passed in object to the arrayList.
+    public Todo saveObject(Todo todo ) {
+
+//        todo.setCompleted(false);
+
+        if (todo.getId() == -1 || todo.getId()== 0) {
+            todo.setId(++idCounter);
+            todos.add(todo);
+
+        } else {
+            deleteById(todo.getId());
+            todos.add(todo);
+        }
+        return todo;
     }
 }// end class

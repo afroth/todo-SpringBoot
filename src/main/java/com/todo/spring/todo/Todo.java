@@ -9,7 +9,9 @@ public class Todo {
     private String username;// stores the username or the user
     private String description;// description of the task
     private Date targetDate;// target date to complete the task
-    private Boolean isCompleted;// stores if the task was completed or not
+    private Boolean isCompleted = false;// stores if the task was completed or not
+
+    protected Todo(){}
     //***********************************************************************************
     // class constructor
     public Todo(long id, String username, String description, Date targetDate, Boolean isCompleted) {
@@ -62,7 +64,7 @@ public class Todo {
         isCompleted = completed;
     }
 
-    @Override
+//    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
